@@ -17,8 +17,12 @@ public class UserApplication : IUserApplication
         this._repository = repository;
     }
 
-    public Task<User> GetUser(int id)
+    public async Task<User> GetUser(int id)
     {
-        return this._repository.GetAsync(id);
+        var user = await this._repository.GetByIdAsync(id);
+
+        return user.HasValue ?
+            user.Value :
+            throw new KeyNotFoundException($"user (id: {id}) not found.");
     }
 }

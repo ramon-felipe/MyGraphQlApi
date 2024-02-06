@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MyGraphQl.Application;
 
 namespace MyGraphQl.Api.Controllers;
+
 [ApiController]
 [Route("api/[controller]")]
 public class UserController : ControllerBase
@@ -15,8 +16,8 @@ public class UserController : ControllerBase
         this._userApplication = userApplication;
     }
 
-    [HttpGet(template: "/{id:int}", Name = "GetUsers")]
-	public async Task<IActionResult> Get(int id)
+    [HttpGet(template: "{id:int}", Name = nameof(GetUser))]
+	public async Task<IActionResult> GetUser(int id)
 	{
         var user = await this._userApplication.GetUser(id);
 
