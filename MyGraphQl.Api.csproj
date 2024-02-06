@@ -8,15 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <EditorConfigFiles Remove="C:\projects\personal\GraphQl\MyGraphQl.Api\.editorconfig" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="C:\projects\personal\GraphQl\MyGraphQl.Api\.editorconfig" />
+    <ProjectReference Include="..\MyGraphQl.Application\MyGraphQl.Application.csproj" />
   </ItemGroup>
 
 </Project>
