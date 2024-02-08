@@ -1,7 +1,11 @@
 using GraphQL;
+using GraphQL.MicrosoftDI;
+using GraphQL.Types;
 using MyGraphQl.Api.GraphQl;
 using MyGraphQl.Api.GraphQl.Queries;
+using MyGraphQl.Api.IoC;
 using MyGraphQl.Application.IoC;
+using MyGraphQl.Infrastructure;
 using MyGraphQl.Infrastructure.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,13 +18,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services
-    .AddGraphQL(b => b
-        .AddSystemTextJson()
-        .AddSchema<MyGraphQlSchema>()
-        .AddGraphTypes(typeof(MyGraphQlQuery).Assembly));
-
-builder.Services
-    .AddApplications()
+    // .AddApplications()
+    .AddApiServices()
     .AddInfrastructure();
 
 var app = builder.Build();

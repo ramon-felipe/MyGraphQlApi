@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using MyGraphQl.Infrastructure.Repositories;
 
@@ -15,9 +14,9 @@ public static class InfrastructureIoC
             {
                 options
                 .UseSqlServer(connString);
-            })
-            .AddScoped<IMyGraphQlContext, MyGraphQlContext>()
-            .AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>))
+            }, contextLifetime: ServiceLifetime.Singleton)
+            .AddSingleton<IMyGraphQlContext, MyGraphQlContext>()
+            .AddSingleton(typeof(IGenericRepository<>), typeof(GenericRepository<>))
             ;
     }
 }

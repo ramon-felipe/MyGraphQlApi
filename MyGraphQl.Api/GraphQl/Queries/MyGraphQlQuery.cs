@@ -7,13 +7,17 @@ namespace MyGraphQl.Api.GraphQl.Queries;
 
 public class MyGraphQlQuery : ObjectGraphType
 {
-    public MyGraphQlQuery(GenericRepository<User> genericRepository)
-    {
-    }
-
-    public MyGraphQlQuery()
+    public MyGraphQlQuery(IGenericRepository<User> repository)
     {
         this.Field<UserType>("users")
-            .Resolve(ctx => new User { Id = 1, Name = "Ramon" });
+            .ResolveAsync(async ctx => await repository.GetByIdAsync(1));
+
+        // when using scoped lifetime services
+        // like the EF default AddDbContext
+        //this.Field<UserType>("users")
+        //    .Resolve()
+        //    .WithScope()
+        //    .WithService<IGenericRepository<User>>()
+        //    .ResolveAsync(async (ctx, service) => await service.GetByIdAsync(1));
     }
 }
