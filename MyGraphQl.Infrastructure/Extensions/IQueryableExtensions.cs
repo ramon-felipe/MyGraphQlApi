@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyGraphQl.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyGraphQl.Infrastructure.Extensions;
 internal static class IQueryableExtensions
@@ -22,10 +17,10 @@ internal static class IQueryableExtensions
         };
     }
 
-    public static IQueryable<TEntity> AddIncludes<TEntity>(this IQueryable<TEntity> queryable, Expression<Func<TEntity, object>>[] expressions)
+    public static IQueryable<TEntity> AddIncludes<TEntity>(this IQueryable<TEntity> queryable, Expression<Func<TEntity, object>>[]? expressions)
         where TEntity : BaseEntity
     {
-        if (expressions.Length == 0)
+        if (expressions == null)
             return queryable;
 
         foreach (var exp in expressions)
@@ -36,10 +31,10 @@ internal static class IQueryableExtensions
         return queryable;
     }
 
-    public static IQueryable<T> AddWhereClauses<T>(this IQueryable<T> queryable, Expression<Func<T, bool>>[] expressions)
+    public static IQueryable<T> AddWhereClauses<T>(this IQueryable<T> queryable, Expression<Func<T, bool>>[]? expressions)
         where T : BaseEntity
     {
-        if (expressions.Length == 0)
+        if (expressions == null)
             return queryable;
 
         foreach (var exp in expressions)

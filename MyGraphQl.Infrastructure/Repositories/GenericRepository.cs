@@ -8,12 +8,14 @@ namespace MyGraphQl.Infrastructure.Repositories;
 
 public interface IGenericRepository<T> where T : BaseEntity
 {
-    Task<IEnumerable<T>> GetAllAsync(
-        Expression<Func<T, bool>>[] conditionExpressions,
+    Task<IEnumerable<T>> GetAllAsync();
+
+    Task<IEnumerable<T>> GetAsync(
+        Expression<Func<T, bool>>[]? conditionExpressions = null,
         QueryTrackingBehavior trackingBehavior = QueryTrackingBehavior.NoTracking,
         params Expression<Func<T, object>>[] includeExpressions);
 
-    Task<Maybe<T>> GetByIdAsync(int id, QueryTrackingBehavior trackingBehavior = QueryTrackingBehavior.NoTracking, params Expression<Func<T, object>>[] includeExpressions);
+    Task<T> GetByIdAsync(int id, QueryTrackingBehavior trackingBehavior = QueryTrackingBehavior.NoTracking, params Expression<Func<T, object>>[]? includeExpressions);
 
     Task<IEnumerable<T>> GetByIdAsync(IEnumerable<int> ids, QueryTrackingBehavior trackingBehavior = QueryTrackingBehavior.NoTracking, params Expression<Func<T, object>>[] includeExpressions);
 }
@@ -29,8 +31,18 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         this._dbSet = this._context.Set<T>();
     }
 
-    public async Task<IEnumerable<T>> GetAllAsync(
-        Expression<Func<T, bool>>[] conditionExpressions,
+    public Task<IEnumerable<T>> GetAllAsync()
+    {
+        var task = Task.Run(() =>
+        {
+            return this._dbSet.AsNoTracking().AsEnumerable();
+        });
+
+        return task;
+    }
+
+    public async Task<IEnumerable<T>> GetAsync(
+        Expression<Func<T, bool>>[]? conditionExpressions = null,
         QueryTrackingBehavior trackingBehavior = QueryTrackingBehavior.NoTracking,
         params Expression<Func<T, object>>[] includeExpressions)
     {
@@ -42,17 +54,17 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
             .ToListAsync();
     }
 
-    public async Task<Maybe<T>> GetByIdAsync(int id, QueryTrackingBehavior trackingBehavior = QueryTrackingBehavior.NoTracking, params Expression<Func<T, object>>[] includeExpressions)
+    public async Task<T> GetByIdAsync(int id, QueryTrackingBehavior trackingBehavior = QueryTrackingBehavior.NoTracking, params Expression<Func<T, object>>[]? includeExpressions )
     {
         var ids = new List<int> { id };
 
         var result = (await this.GetByIdAsync(ids, trackingBehavior, includeExpressions))
             .SingleOrDefault();
 
-        return result == null ? Maybe.None : Maybe.From(result);
+        return result;
     }
 
-    public async Task<IEnumerable<T>> GetByIdAsync(IEnumerable<int> ids, QueryTrackingBehavior trackingBehavior = QueryTrackingBehavior.NoTracking, params Expression<Func<T, object>>[] includeExpressions)
+    public async Task<IEnumerable<T>> GetByIdAsync(IEnumerable<int> ids, QueryTrackingBehavior trackingBehavior = QueryTrackingBehavior.NoTracking, params Expression<Func<T, object>>[]? includeExpressions)
     {
         return await this
             ._dbSet

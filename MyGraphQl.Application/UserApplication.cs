@@ -21,8 +21,10 @@ public class UserApplication : IUserApplication
     {
         var user = await this._repository.GetByIdAsync(id);
 
-        return user.HasValue ?
-            user.Value :
-            throw new KeyNotFoundException($"user (id: {id}) not found.");
+        return user;
+
+        //return user.HasValue ?
+        //    user.Value :
+        //    throw new KeyNotFoundException($"user (id: {id}) not found.");
     }
 }
