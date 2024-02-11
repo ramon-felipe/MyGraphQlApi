@@ -14,9 +14,9 @@ public static class InfrastructureIoC
             {
                 options
                 .UseSqlServer(connString);
-            }, contextLifetime: ServiceLifetime.Singleton)
-            .AddSingleton<IMyGraphQlContext, MyGraphQlContext>()
-            .AddSingleton(typeof(IGenericRepository<>), typeof(GenericRepository<>))
+            })
+            .AddScoped<IMyGraphQlContext, MyGraphQlContext>()
+            .AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>))
             ;
     }
 }

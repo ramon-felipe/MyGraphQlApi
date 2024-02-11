@@ -1,12 +1,6 @@
-using GraphQL;
-using GraphQL.MicrosoftDI;
-using GraphQL.Types;
-using MyGraphQl.Api.GraphQl;
-using MyGraphQl.Api.GraphQl.Queries;
 using MyGraphQl.Api.IoC;
-using MyGraphQl.Application.IoC;
-using MyGraphQl.Infrastructure;
 using MyGraphQl.Infrastructure.IoC;
+using MyGraphQl.Application.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,8 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services
-    // .AddApplications()
     .AddApiServices()
+    .AddApplications()
     .AddInfrastructure();
 
 var app = builder.Build();
@@ -35,11 +29,13 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-// app.MapControllers();
+app.MapControllers();
+
+app.MapGraphQL();
 
 // GraphQL Playground uses components of GraphiQL under the hood but is meant as a more powerful GraphQL IDE 
 // https://github.com/graphql/graphql-playground/blob/main/packages/graphql-playground-react/README.md
-app.UseGraphQL();
-app.UseGraphQLPlayground();
+//app.UseGraphQL();
+//app.UseGraphQLPlayground();
 
 app.Run();
