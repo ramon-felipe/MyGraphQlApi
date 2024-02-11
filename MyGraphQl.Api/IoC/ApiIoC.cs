@@ -8,7 +8,7 @@ public static class ApiIoC
     {
         services
             .AddGraphQLServer()
-            .AddQueryType<Query>();
+            .AddQueryType<Query>().AddProjections().AddFiltering().AddSorting();
 
         return services;
     }
