@@ -1,4 +1,5 @@
 ﻿using MyGraphQl.HotChocolate.Api.Queries;
+using MyGraphQl.Infrastructure;
 
 namespace MyGraphQl.HotChocolate.Api.ApiIoC;
 
@@ -14,7 +15,8 @@ public static class ApiIoC
     {
         services
             .AddGraphQLServer()
-            .AddQueryType<Query>()
+            .RegisterDbContext<MyGraphQlContext>()
+            .AddQueryType<NewQuery>()
             .AddProjections()
             .AddFiltering()
             .AddSorting();
