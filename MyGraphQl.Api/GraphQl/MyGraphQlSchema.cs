@@ -1,10 +1,12 @@
-﻿namespace MyGraphQl.Api.GraphQl;
+﻿using MyGraphQl.Api.GraphQl.Queries;
 
-//public class MyGraphQlSchema : Schema
-//{
-//    public MyGraphQlSchema(IServiceProvider serviceProvider)
-//    {
-//        this.Query = serviceProvider.GetRequiredService<MyGraphQlQuery>();
-//        this.Description = "Example MyGraphQlSchema schema";
-//    }
-//}
+namespace MyGraphQl.Api.GraphQl;
+
+public class MyGraphQlSchema : GraphQL.Types.Schema
+{
+    public MyGraphQlSchema(IServiceProvider serviceProvider)
+    {
+        this.Query = serviceProvider.GetRequiredService<MyGraphQlQuery>();
+        this.Description = "Example MyGraphQlSchema schema";
+    }
+}

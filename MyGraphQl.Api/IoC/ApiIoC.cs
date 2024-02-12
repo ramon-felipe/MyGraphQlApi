@@ -1,15 +1,21 @@
-﻿using MyGraphQl.Api.GraphQl.Queries;
+﻿using GraphQL;
+using GraphQL.MicrosoftDI;
+using MyGraphQl.Api.GraphQl;
 
 namespace MyGraphQl.Api.IoC;
 
-public static class ApiIoC
+internal static class ApiIoC
 {
-    public static IServiceCollection AddApiServices(this IServiceCollection services)
+    internal static IServiceCollection AddGraphQlServices(this IServiceCollection services)
     {
-        services
-            .AddGraphQLServer()
-            .AddQueryType<Query>().AddProjections().AddFiltering().AddSorting();
+        return services
+            .AddGraphQlOriginal();
+    }
 
-        return services;
+    private static IServiceCollection AddGraphQlOriginal(this IServiceCollection services)
+    {
+        return services
+            .AddGraphQL(b => b.AddSystemTextJson())
+            .AddScoped<GraphQL.Types.ISchema, MyGraphQlSchema>(services => new MyGraphQlSchema(new SelfActivatingServiceProvider(services)));
     }
 }

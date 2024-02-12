@@ -13,7 +13,7 @@ public class ProcessUserMapping
     public int ProcessId { get; set; }
     public bool HasAccess { get; set; }
 
-    [UseSorting]
+    //[UseSorting]
     public virtual User User { get; set; } = null!;
     public virtual Process Process { get; set; } = null!;
 }

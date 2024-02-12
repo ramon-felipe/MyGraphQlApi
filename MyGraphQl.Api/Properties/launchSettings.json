@@ -32,7 +32,7 @@
     "Graphql": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "graphql",
+      "launchUrl": "ui/playground",
       "applicationUrl": "https://localhost:7042;http://localhost:5135",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

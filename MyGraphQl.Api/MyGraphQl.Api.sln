@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34310.174
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGraphQl.Api", "MyGraphQl.Api.csproj", "{725CAD21-41A1-461B-B5A1-68F1F0F109BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGraphQl.Api", "MyGraphQl.Api.csproj", "{725CAD21-41A1-461B-B5A1-68F1F0F109BB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BDC54485-18F6-4A60-8BE5-6E6CB02C6DD8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{8B4C9F5D-40DE-4B3A-8EF3-51E9DEFD01A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGraphQl.UnitTests", "..\MyGraphQl.UnitTests\MyGraphQl.UnitTests.csproj", "{AC628852-4A94-4D60-85A1-AE762F1285A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGraphQl.UnitTests", "..\MyGraphQl.UnitTests\MyGraphQl.UnitTests.csproj", "{AC628852-4A94-4D60-85A1-AE762F1285A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGraphQl.Domain", "..\MyGraphQl.Domain\MyGraphQl.Domain.csproj", "{F9EC7F3C-405D-46D3-AAAE-53846DBFA001}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGraphQl.Domain", "..\MyGraphQl.Domain\MyGraphQl.Domain.csproj", "{F9EC7F3C-405D-46D3-AAAE-53846DBFA001}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGraphQl.Infrastructure", "..\MyGraphQl.Infrastructure\MyGraphQl.Infrastructure.csproj", "{324D648B-94A2-4BEA-A245-76D34362F36F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGraphQl.Infrastructure", "..\MyGraphQl.Infrastructure\MyGraphQl.Infrastructure.csproj", "{324D648B-94A2-4BEA-A245-76D34362F36F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGraphQl.Application", "..\MyGraphQl.Application\MyGraphQl.Application.csproj", "{ECD5AC52-2278-446F-B15F-A7BDBE646469}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGraphQl.Application", "..\MyGraphQl.Application\MyGraphQl.Application.csproj", "{ECD5AC52-2278-446F-B15F-A7BDBE646469}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGraphQl.HotChocolate.Api", "..\MyGraphQl.HotChocolate.Api\MyGraphQl.HotChocolate.Api.csproj", "{36FEE354-AA3A-48C7-93F9-61AF5AB10A0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{ECD5AC52-2278-446F-B15F-A7BDBE646469}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECD5AC52-2278-446F-B15F-A7BDBE646469}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECD5AC52-2278-446F-B15F-A7BDBE646469}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36FEE354-AA3A-48C7-93F9-61AF5AB10A0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36FEE354-AA3A-48C7-93F9-61AF5AB10A0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36FEE354-AA3A-48C7-93F9-61AF5AB10A0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36FEE354-AA3A-48C7-93F9-61AF5AB10A0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{F9EC7F3C-405D-46D3-AAAE-53846DBFA001} = {BDC54485-18F6-4A60-8BE5-6E6CB02C6DD8}
 		{324D648B-94A2-4BEA-A245-76D34362F36F} = {BDC54485-18F6-4A60-8BE5-6E6CB02C6DD8}
 		{ECD5AC52-2278-446F-B15F-A7BDBE646469} = {BDC54485-18F6-4A60-8BE5-6E6CB02C6DD8}
+		{36FEE354-AA3A-48C7-93F9-61AF5AB10A0A} = {BDC54485-18F6-4A60-8BE5-6E6CB02C6DD8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72271FC6-A420-4FD5-B196-163875BB9567}
