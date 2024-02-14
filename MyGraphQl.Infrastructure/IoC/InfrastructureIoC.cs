@@ -16,7 +16,7 @@ public static class InfrastructureIoC
                 .UseSqlServer(connString);
             })
             .AddScoped<IMyGraphQlContext, MyGraphQlContext>()
-            .AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>))
-            ;
+            .AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>))
+        ;
     }
 }

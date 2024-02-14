@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MyGraphQl.Domain;
 
 [Table("ProcessUserMappings")]
-public class ProcessUserMapping
+public class ProcessUserMapping //: BaseEntity
 {
     [ForeignKey("User")]
     public int UserId { get; set; }

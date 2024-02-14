@@ -20,13 +20,11 @@ public interface IGenericRepository<T> where T : BaseEntity
 
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 {
-    private readonly IMyGraphQlContext _context;
     protected readonly DbSet<T> _dbSet;
 
     public GenericRepository(IMyGraphQlContext context)
     {
-        this._context = context;
-        this._dbSet = this._context.Set<T>();
+        this._dbSet = context.Set<T>();
     }
 
     public async Task<IEnumerable<T>> GetAllAsync(

@@ -15,7 +15,8 @@ internal static class ApiIoC
     private static IServiceCollection AddGraphQlOriginal(this IServiceCollection services)
     {
         return services
-            .AddGraphQL(b => b.AddSystemTextJson())
-            .AddScoped<GraphQL.Types.ISchema, MyGraphQlSchema>(services => new MyGraphQlSchema(new SelfActivatingServiceProvider(services)));
+        .AddGraphQL(b => b
+            .AddSystemTextJson())
+        .AddSingleton<GraphQL.Types.ISchema>(services => new MyGraphQlSchema(new SelfActivatingServiceProvider(services)));
     }
 }
