@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyGraphQl.Domain;
+using MyGraphQl.HotChocolate.Api.DataLoaders;
 using MyGraphQl.HotChocolate.Api.Types;
 using MyGraphQl.Infrastructure;
 using MyGraphQl.Infrastructure.Repositories;
@@ -37,6 +38,15 @@ public class CodeFirstQuery
     /// <returns>A <see cref="User"/> when found or null when not found.</returns>
     public User? GetUser([Service(ServiceKind.Synchronized)] IMyGraphQlContext ctx, int id)
         => ctx.Users.AsNoTracking().SingleOrDefault(_ => _.Id == id);
+
+    /// <summary>
+    /// Gets an user by its ID
+    /// </summary>
+    /// <param name="id">The user ID.</param>
+    /// <param name="dataLoader"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public Task<User> GetUserDataLoader(int id, UserBatchDataLoader dataLoader, CancellationToken cancellationToken) => dataLoader.LoadAsync(id, cancellationToken);
 
     /// <summary>
     /// Gets all the users.
