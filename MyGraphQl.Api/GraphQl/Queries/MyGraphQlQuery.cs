@@ -1,8 +1,10 @@
 ﻿using GraphQL;
 using GraphQL.MicrosoftDI;
 using GraphQL.Types;
+using Microsoft.EntityFrameworkCore;
 using MyGraphQl.Api.GraphQl.Types;
 using MyGraphQl.Domain;
+using MyGraphQl.Infrastructure;
 using MyGraphQl.Infrastructure.Repositories;
 
 namespace MyGraphQl.Api.GraphQl.Queries;
@@ -23,6 +25,18 @@ public class MyGraphQlQuery : ObjectGraphType
                 var id = ctx.GetArgument<int>("id");
                 return await service.GetByIdAsync(id);
             });
+
+        this.Field<ListGraphType<ProcessType>>("users")
+            .Resolve()
+            .WithScope()
+            .WithService<IMyGraphQlContext>()
+            .ResolveAsync(async (ctx, service) => await service.Users.AsNoTracking().ToListAsync());
+
+        this.Field<ListGraphType<ProcessType>>("processes")
+            .Resolve()
+            .WithScope()
+            .WithService<IMyGraphQlContext>()
+            .ResolveAsync(async (ctx, service) => await service.Processes.AsNoTracking().ToListAsync());
 
         // another way of doing the same as above. 
         // using ctx.RequestServices.GetRequiredService<TService>()

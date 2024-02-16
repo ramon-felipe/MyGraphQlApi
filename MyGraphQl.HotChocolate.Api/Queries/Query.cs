@@ -1,4 +1,5 @@
 ﻿using HotChocolate;
+using HotChocolate.Execution;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.SqlServer.Server;
 using MyGraphQl.Domain;
@@ -26,20 +27,30 @@ public class Query
     public Task<IEnumerable<Process>> Processes([Service(ServiceKind.Synchronized)] IGenericRepository<Process> ctx) => ctx.GetAllAsync();
 }
 
-public class NewQuery
+public class CodeFirstQuery
 {
-    public IQueryable<User> GetUsers([Service] IMyGraphQlContext ctx)
+    public IQueryable<User> GetUsers([Service(ServiceKind.Synchronized)] IMyGraphQlContext ctx)
     {
         return ctx.Users.AsNoTracking().Include(_ => _.UserProcesses);
     }
+
+    public IQueryable<Process> GetProcesses([Service(ServiceKind.Synchronized)] IMyGraphQlContext ctx)
+    {
+        return ctx.Processes.AsNoTracking().Include(_ => _.UserProcesses);
+    }
+
 }
 
-public class QueryType : ObjectType<NewQuery>
+public class QueryType : ObjectType<CodeFirstQuery>
 {
-    protected override void Configure(IObjectTypeDescriptor<NewQuery> descriptor)
+    protected override void Configure(IObjectTypeDescriptor<CodeFirstQuery> descriptor)
     {
         descriptor
             .Field(_ => _.GetUsers(default!))
             .Type<UserType>();
+
+        descriptor
+            .Field(_ => _.GetUsers(default!))
+            .Type<ProcessType>();
     }
 }

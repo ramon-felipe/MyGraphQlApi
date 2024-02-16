@@ -16,7 +16,7 @@ public static class ApiIoC
         services
             .AddGraphQLServer()
             .RegisterDbContext<MyGraphQlContext>()
-            .AddQueryType<NewQuery>()
+            .AddQueryType<CodeFirstQuery>()
             .AddProjections()
             .AddFiltering()
             .AddSorting();
