@@ -1,6 +1,8 @@
-﻿using GraphQL.MicrosoftDI;
+﻿using GraphQL.DataLoader;
+using GraphQL.MicrosoftDI;
 using GraphQL.Types;
 using Microsoft.EntityFrameworkCore;
+using MyGraphQl.Api.DataLoaders;
 using MyGraphQl.Domain;
 using MyGraphQl.Infrastructure;
 
@@ -20,18 +22,13 @@ public class UserType : ObjectGraphType<User>
             .WithScope()
             .WithService<IMyGraphQlContext>()
             .Resolve((ctx, service) => service.ProcessUserMapping.AsNoTracking().Where(_ => _.UserId == ctx.Source.Id).ToList());
-    }
-}
 
-public class UserProcessType : ObjectGraphType<ProcessUserMapping>
-{
-    public UserProcessType(/*IMyGraphQlContext myCtx*/)
-    {
-        this.Field(_ => _.UserId);
-        this.Field(_ => _.ProcessId);
-        this.Field(_ => _.HasAccess);
-        //this.Field(_ => _.Process);
-        
-        //this.Field<UserType, User>("user").Resolve(ctx => myCtx.Users.FirstOrDefault(_ => _.Id == ctx.Source.UserId));
+        this.Field<ListGraphType<UserProcessType>>("userProcessesBatchLoader")
+            .Resolve()
+            .WithService<MyUserProcessMappingDataLoader>()
+            .Resolve((ctx, loader) =>
+            {
+                return loader.LoadAsync(ctx.Source.Id);
+            });
     }
 }

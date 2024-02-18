@@ -2,6 +2,7 @@
 using GraphQL.MicrosoftDI;
 using GraphQL.Types;
 using Microsoft.EntityFrameworkCore;
+using MyGraphQl.Api.DataLoaders;
 using MyGraphQl.Api.GraphQl.Types;
 using MyGraphQl.Domain;
 using MyGraphQl.Infrastructure;
@@ -24,6 +25,16 @@ public class MyGraphQlQuery : ObjectGraphType
             {
                 var id = ctx.GetArgument<int>("id");
                 return await service.GetByIdAsync(id);
+            });
+
+        this.Field<UserType, User?>("usersBatchDataLoad")
+            .Argument<IdGraphType>("id")
+            .Resolve()
+            .WithService<MyUserDataLoader>()
+            .ResolveAsync((ctx, loader) =>
+            {
+                var id = ctx.GetArgument<int>("id");
+                return loader.LoadAsync(id);
             });
 
         this.Field<ListGraphType<ProcessType>>("users")
