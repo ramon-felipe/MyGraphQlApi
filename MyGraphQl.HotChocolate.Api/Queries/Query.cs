@@ -46,7 +46,8 @@ public class CodeFirstQuery
     /// <param name="dataLoader"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public Task<User> GetUserDataLoader(int id, UserBatchDataLoader dataLoader, CancellationToken cancellationToken) => dataLoader.LoadAsync(id, cancellationToken);
+    public Task<User> GetUserDataLoader(int id, UserBatchDataLoader dataLoader, CancellationToken cancellationToken)
+        => dataLoader.LoadAsync(id, cancellationToken);
 
     /// <summary>
     /// Gets all the users.
@@ -70,6 +71,10 @@ public class CodeFirstQuery
 /// </summary>
 public class QueryType : ObjectType<CodeFirstQuery>
 {    
+    /// <summary>
+    /// Configures the <see cref="QueryType"/>.
+    /// </summary>
+    /// <param name="descriptor"></param>
     protected override void Configure(IObjectTypeDescriptor<CodeFirstQuery> descriptor)
     {
         descriptor.Description("The main query");
@@ -85,7 +90,7 @@ public class QueryType : ObjectType<CodeFirstQuery>
             .Description("Gets all the users");
 
         descriptor
-            .Field(_ => _.GetUsers(default!))
+            .Field(_ => _.GetProcesses(default!))
             .Type<ProcessType>();
     }
 }

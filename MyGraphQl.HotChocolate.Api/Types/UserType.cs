@@ -7,13 +7,17 @@ namespace MyGraphQl.HotChocolate.Api.Types;
 /// </summary>
 public class UserType : ObjectType<User>
 {
+    /// <summary>
+    /// Configures <see cref="UserType"/>.
+    /// </summary>
+    /// <param name="descriptor"></param>
     protected override void Configure(IObjectTypeDescriptor<User> descriptor)
     {
         descriptor.Description("A user object");
 
-        descriptor.Field(_ => _.Id).Type<IntType>().Description("The user id");
-        descriptor.Field(_ => _.Name).Type<StringType>().Description("The user name");
-        descriptor.Field(_ => _.Age).Type<IntType>().Description("The user age");
-        descriptor.Field(_ => _.LastName).Type<StringType>().Description("The user last name");
+        descriptor.Implements<BaseTypeWithName>();
+
+        descriptor.Field(_ => _.Age).Type<IntType>();
+        descriptor.Field(_ => _.LastName).Type<StringType>();
     }
 }

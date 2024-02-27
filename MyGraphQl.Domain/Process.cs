@@ -6,13 +6,8 @@ namespace MyGraphQl.Domain;
 /// A process
 /// </summary>
 [Table("Processes")]
-public class Process : BaseEntity
+public class Process : BaseEntityWithName
 {
-    /// <summary>
-    /// The process name
-    /// </summary>
-    public string Name { get; set; } = string.Empty;
-    
     /// <summary>
     /// User process mappings<para/>
     /// Maps users x processes

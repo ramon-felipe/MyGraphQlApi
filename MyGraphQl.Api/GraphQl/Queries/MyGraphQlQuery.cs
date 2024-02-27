@@ -37,7 +37,7 @@ public class MyGraphQlQuery : ObjectGraphType
                 return loader.LoadAsync(id);
             });
 
-        this.Field<ListGraphType<ProcessType>>("users")
+        this.Field<ListGraphType<UserType>>("users")
             .Resolve()
             .WithScope()
             .WithService<IMyGraphQlContext>()
