@@ -19,7 +19,8 @@ internal static class ApiIoC
     {
         return services
             .AddGraphQL(b => b
-                .AddSystemTextJson())
+                .AddSystemTextJson()
+                .AddErrorInfoProvider(opt => opt.ExposeExceptionDetails = true))
             .AddSingleton<GraphQL.Types.ISchema>(services => new MyGraphQlSchema(new SelfActivatingServiceProvider(services)))
         ;
     }

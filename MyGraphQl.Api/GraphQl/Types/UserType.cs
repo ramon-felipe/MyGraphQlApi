@@ -1,8 +1,8 @@
-﻿using GraphQL.DataLoader;
-using GraphQL.MicrosoftDI;
+﻿using GraphQL.MicrosoftDI;
 using GraphQL.Types;
 using Microsoft.EntityFrameworkCore;
 using MyGraphQl.Api.DataLoaders;
+using MyGraphQl.Api.Interfaces;
 using MyGraphQl.Domain;
 using MyGraphQl.Infrastructure;
 
@@ -30,5 +30,9 @@ public class UserType : ObjectGraphType<User>
             {
                 return loader.LoadAsync(ctx.Source.Id);
             });
+
+        // Basically, it imposes we have to implement all the fields specified in the BaseEntityWithNameInterface
+        // on this type
+        this.Interface<BaseEntityWithNameInterface>();
     }
 }

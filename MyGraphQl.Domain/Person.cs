@@ -1,16 +1,14 @@
 ﻿namespace MyGraphQl.Domain;
 
-public abstract class Person : BaseEntity
+/// <summary>
+/// A <see cref="Person"/>.
+/// </summary>
+public abstract class Person : BaseEntityWithName
 {
     /// <summary>
     /// The person Age.
     /// </summary>
     public int Age { get; set; }
-
-    /// <summary>
-    /// The person Name
-    /// </summary>
-    public string Name { get; set; } = string.Empty;
 
     /// <summary>
     /// The <see cref="Person.LastName"/>.

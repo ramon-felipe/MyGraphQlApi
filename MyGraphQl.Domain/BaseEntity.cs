@@ -2,6 +2,9 @@
 
 namespace MyGraphQl.Domain;
 
+/// <summary>
+/// A base entity.
+/// </summary>
 public abstract class BaseEntity
 {
     /// <summary>
